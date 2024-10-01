@@ -1,0 +1,10 @@
+vulnerabilities:
+  - id: CVE-2023-2650
+    expired_at: 2024-09-01
+    statement: justification why this exception is needed
+misconfigurations:
+  - id: AVD-DS-0002
+    paths:
+      - docs/Dockerfile
+    expired_at: 2024-09-01
+    statement: justification why this exception is needed
