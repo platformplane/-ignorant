@@ -2,7 +2,6 @@ package converter
 
 import (
 	"bytes"
-	"strings"
 	"time"
 
 	"gopkg.in/yaml.v3"
@@ -17,9 +16,9 @@ func (c *Converter) DeleteTrivyIgnore() error {
 }
 
 func (c *Converter) WriteTrivyIgnore() error {
-	if err := c.writeTrivyIgnore(); err != nil {
-		return err
-	}
+	// if err := c.writeTrivyIgnore(); err != nil {
+	// 	return err
+	// }
 
 	if err := c.writeTrivyIgnoreYAML(); err != nil {
 		return err
@@ -28,57 +27,57 @@ func (c *Converter) WriteTrivyIgnore() error {
 	return nil
 }
 
-func (c *Converter) writeTrivyIgnore() error {
-	b := new(bytes.Buffer)
+// func (c *Converter) writeTrivyIgnore() error {
+// 	b := new(bytes.Buffer)
 
-	type Line struct {
-		ID        string `yaml:"id,omitempty"`
-		Statement string `yaml:"Statement,omitempty"`
-	}
+// 	type Line struct {
+// 		ID        string `yaml:"id,omitempty"`
+// 		Statement string `yaml:"Statement,omitempty"`
+// 	}
 
-	var lines []Line
+// 	var lines []Line
 
-	now := time.Now()
+// 	now := time.Now()
 
-	for _, f := range c.Vulnerabilities {
-		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
-			continue
-		}
+// 	for _, f := range c.Vulnerabilities {
+// 		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
+// 			continue
+// 		}
 
-		lines = append(lines, Line{
-			ID:        f.ID,
-			Statement: f.Statement,
-		})
-	}
+// 		lines = append(lines, Line{
+// 			ID:        f.ID,
+// 			Statement: f.Statement,
+// 		})
+// 	}
 
-	for _, f := range c.Misconfigurations {
-		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
-			continue
-		}
+// 	for _, f := range c.Misconfigurations {
+// 		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
+// 			continue
+// 		}
 
-		lines = append(lines, Line{
-			ID:        f.ID,
-			Statement: f.Statement,
-		})
-	}
+// 		lines = append(lines, Line{
+// 			ID:        f.ID,
+// 			Statement: f.Statement,
+// 		})
+// 	}
 
-	for i, l := range lines {
-		if i > 0 {
-			b.WriteString("\n")
-		}
+// 	for i, l := range lines {
+// 		if i > 0 {
+// 			b.WriteString("\n")
+// 		}
 
-		if l.Statement != "" {
-			b.WriteString("# ")
-			b.WriteString(strings.TrimSpace(l.Statement))
-			b.WriteString("\n")
-		}
+// 		if l.Statement != "" {
+// 			b.WriteString("# ")
+// 			b.WriteString(strings.TrimSpace(l.Statement))
+// 			b.WriteString("\n")
+// 		}
 
-		b.WriteString(l.ID)
-		b.WriteString("\n")
-	}
+// 		b.WriteString(l.ID)
+// 		b.WriteString("\n")
+// 	}
 
-	return c.writeFile(".trivyignore", b.Bytes())
-}
+// 	return c.writeFile(".trivyignore", b.Bytes())
+// }
 
 func (c *Converter) writeTrivyIgnoreYAML() error {
 	file := TrivyConfig{}

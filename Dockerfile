@@ -45,5 +45,7 @@ COPY --from=build /src/converter /usr/local/bin/converter
 
 VOLUME /cache
 
+WORKDIR /src
+
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/usr/local/bin/scanner"]
