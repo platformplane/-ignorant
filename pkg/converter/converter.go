@@ -1,17 +1,19 @@
-package ignorant
+package converter
 
 import (
 	"os"
 	"path/filepath"
+
+	"github.com/platformplane/scanner/pkg/config"
 )
 
 type Converter struct {
-	*Config
+	*config.Config
 
 	root string
 }
 
-func New(cfg *Config, root string) *Converter {
+func New(cfg *config.Config, root string) *Converter {
 	return &Converter{
 		cfg,
 		root,

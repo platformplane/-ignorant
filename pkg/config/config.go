@@ -1,8 +1,7 @@
-package ignorant
+package config
 
 import (
 	"bytes"
-	"errors"
 	"os"
 	"path/filepath"
 	"time"
@@ -38,6 +37,9 @@ func Parse(path string) (*Config, error) {
 	names := []string{
 		path,
 
+		filepath.Join(path, "securityignore.yaml"),
+		filepath.Join(path, "securityignore.yml"),
+
 		filepath.Join(path, ".securityignore.yaml"),
 		filepath.Join(path, ".securityignore.yml"),
 	}
@@ -53,14 +55,10 @@ func Parse(path string) (*Config, error) {
 		}
 	}
 
-	if len(data) == 0 {
-		return nil, errors.New("unable to read configuration file")
-	}
-
 	cfg := new(Config)
 
-	if err != nil {
-		return nil, err
+	if len(data) == 0 {
+		return cfg, nil
 	}
 
 	decoder := yaml.NewDecoder(bytes.NewReader(data))

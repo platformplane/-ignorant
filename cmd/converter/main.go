@@ -3,17 +3,18 @@ package main
 import (
 	"errors"
 
-	"github.com/platformplane/ignorant"
+	"github.com/platformplane/scanner/pkg/config"
+	"github.com/platformplane/scanner/pkg/converter"
 )
 
 func main() {
-	cfg, err := ignorant.Parse(".")
+	cfg, err := config.Parse(".")
 
 	if err != nil {
 		panic(err)
 	}
 
-	c := ignorant.New(cfg, ".")
+	c := converter.New(cfg, ".")
 
 	var result error
 

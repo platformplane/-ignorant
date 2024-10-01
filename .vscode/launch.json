@@ -5,11 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Converter",
+            "name": "Launch Convert",
             "type": "go",
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}/cmd/converter",
+            "cwd": "${workspaceFolder}/example"
+        },
+        {
+            "name": "Launch Scan",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/scaner",
             "cwd": "${workspaceFolder}/example"
         }
     ]

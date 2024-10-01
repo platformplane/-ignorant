@@ -1,4 +1,4 @@
-package ignorant
+package converter
 
 import (
 	"bytes"
@@ -38,7 +38,13 @@ func (c *Converter) writeTrivyIgnore() error {
 
 	var lines []Line
 
+	now := time.Now()
+
 	for _, f := range c.Vulnerabilities {
+		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
+			continue
+		}
+
 		lines = append(lines, Line{
 			ID:        f.ID,
 			Statement: f.Statement,
@@ -46,6 +52,10 @@ func (c *Converter) writeTrivyIgnore() error {
 	}
 
 	for _, f := range c.Misconfigurations {
+		if f.ExpiredAt != nil && f.ExpiredAt.Before(now) {
+			continue
+		}
+
 		lines = append(lines, Line{
 			ID:        f.ID,
 			Statement: f.Statement,
