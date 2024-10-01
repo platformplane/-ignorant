@@ -17,7 +17,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/cmd/scaner",
+            "program": "${workspaceFolder}/cmd/scanner",
             "cwd": "${workspaceFolder}/example"
         }
     ]

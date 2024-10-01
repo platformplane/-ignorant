@@ -1,30 +1,17 @@
 package main
 
 import (
-	"errors"
-
-	"github.com/platformplane/scanner/pkg/config"
 	"github.com/platformplane/scanner/pkg/converter"
 )
 
 func main() {
-	cfg, err := config.Parse(".")
+	c, err := converter.New(".")
 
 	if err != nil {
 		panic(err)
 	}
 
-	c := converter.New(cfg, ".")
-
-	var result error
-
-	c.DeleteTrivyIgnore()
-
-	if err := c.WriteTrivyIgnore(); err != nil {
-		result = errors.Join(result, err)
-	}
-
-	if result != nil {
-		panic(result)
+	if err := c.EnsureIngoreFiles(); err != nil {
+		panic(err)
 	}
 }

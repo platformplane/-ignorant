@@ -7,7 +7,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func (c *Converter) DeleteTrivyIgnore() error {
+func (c *Converter) DeleteTrivyFiles() error {
 	c.deleteFile(".trivyignore")
 	c.deleteFile(".trivyignore.yml")
 	c.deleteFile(".trivyignore.yaml")
@@ -15,7 +15,7 @@ func (c *Converter) DeleteTrivyIgnore() error {
 	return nil
 }
 
-func (c *Converter) WriteTrivyIgnore() error {
+func (c *Converter) WriteTrivyFiles() error {
 	// if err := c.writeTrivyIgnore(); err != nil {
 	// 	return err
 	// }
